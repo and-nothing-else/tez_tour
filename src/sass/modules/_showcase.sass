@@ -1,0 +1,22 @@
+.section_showcase
+  +size(100%)
+  background: #041032 url("/images/city.jpeg") center no-repeat
+  background-size: cover
+  color: white
+  text-align: center
+  padding-top: 33.9vh
+
+  h1
+    font:
+      size: 40px
+      weight: bold
+    &:after
+      content: ''
+      +center-block()
+      +size(134px, 2px)
+      background: $brand-primary
+      margin-top: 12px
+  .note
+    font:
+      size: 26px
+      weight: 100

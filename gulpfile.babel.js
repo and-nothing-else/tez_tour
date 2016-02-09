@@ -62,6 +62,9 @@ gulp.task('clean', () => {
 gulp.task('copy', () => {
     gulp.src([
     ]).pipe(gulp.dest(files.dest.vendor));
+    gulp.src(`${dirs.src_images}/**/*.*`)
+        .pipe(gulp.dest(files.dest.images))
+        .pipe(production ? gutil.noop() : connect.reload());
 });
 
 gulp.task('jade', () => {
