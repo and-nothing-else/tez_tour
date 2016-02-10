@@ -1,0 +1,28 @@
+.section--partners
+  background: url("/images/partnersBG.jpg") center no-repeat
+  background-size: cover
+
+  .section_head
+    margin-bottom: 34px
+
+  .info
+    +make-row()
+    font-size: 18px
+    margin-bottom: 78px
+    &__text
+      +make-col()
+      padding-top: 15px
+      p
+        line-height: 30px
+        margin-bottom: 30px
+    &__image
+      @extend .hidden-sm-down
+      img
+        @extend .img-fluid
+
+    +media-breakpoint-up(md)
+      &__text
+        +make-col-span(7)
+      &__image
+        +make-col()
+        +make-col-span(5)
