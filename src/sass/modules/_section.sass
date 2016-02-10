@@ -1,0 +1,20 @@
+.section
+  &_head
+    padding-top: 93px
+    text-align: center
+    &__header
+      font:
+        size: 30px
+        weight: bold
+      margin-bottom: 14px
+      &:after
+        content: ''
+        +center-block()
+        +size(134px, 2px)
+        background: $brand-primary
+        margin-top: 16px
+    &__subheader
+      font:
+        size: 22px
+        weight: 100
+      line-height: 30px

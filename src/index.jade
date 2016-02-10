@@ -1,15 +1,18 @@
 doctype html
 
+
 head
     title Tez Tour
     link(href='https://fonts.googleapis.com/css?family=Roboto:100,400,700&subset=latin,cyrillic', rel='stylesheet')
     link(rel="stylesheet", href="/styles/style.css")
 
+
 body
-    section.section_showcase#section_showcase
-        h1 TEZ TOUR Dubai Multi Commodities Center
-        p.note
-            | is a global tour operator operates under the same globally registered
-            br
-            | commercial brand TEZ TOUR
+    include ./sections/_showcase
+    include ./sections/_about
+    include ./sections/_partners
+    include ./sections/_community
+    include ./sections/_codex
+    include ./sections/_contact
+
     script(src="/scripts/script.js")
