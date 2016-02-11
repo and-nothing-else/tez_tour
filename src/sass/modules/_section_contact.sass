@@ -1,0 +1,49 @@
+.section--contact
+  background: #f2efe9 url("/src/data-images/contactPTRN.gif") repeat
+
+  .section_head
+    margin-bottom: 40px
+
+  .info
+    +make-row()
+    margin-bottom: 68px
+    .content
+      padding: 36px 33px 19px
+      margin-bottom: 30px
+      h4
+        margin-bottom: 14px
+        font:
+          size: 22px
+          weight: normal
+      dl
+        dt
+          +pull-left()
+          margin-right: 5px
+          color: $brand-primary
+          font-weight: normal
+        dd
+          margin-bottom: 6px
+      +media-breakpoint-only(lg)
+        padding-right: 6px
+        padding-left: 30px
+    &__address
+      +make-col()
+      +make-col-span(12)
+      .content
+        background: white
+        +media-breakpoint-up(md)
+          dl
+            column-count: 2
+    &__person
+      +make-col()
+      +make-col-span(12)
+      .content
+        border: $border-width solid $brand-primary
+        +media-breakpoint-only(md)
+          dl
+            column-count: 2
+    +media-breakpoint-up(lg)
+      &__address
+        +make-col-span(8)
+      &__person
+        +make-col-span(4)

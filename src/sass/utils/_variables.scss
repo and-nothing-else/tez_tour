@@ -78,7 +78,7 @@ $spacers: (
     y:   ($spacer-y * 3)
   )
 ) !default;
-$border-width:               1px !default;
+$border-width:               2px !default;
 
 
 // Body
@@ -93,10 +93,10 @@ $body-color:                 black !default;
 //
 // Style anchor elements.
 
-$link-color:                 $brand-primary !default;
-$link-decoration:            none !default;
-$link-hover-color:           darken($link-color, 15%) !default;
-$link-hover-decoration:      underline !default;
+$link-color:                 black !default;
+$link-decoration:            underline !default;
+$link-hover-color:           lighten($link-color, 50%) !default;
+$link-hover-decoration:      none !default;
 
 
 // Grid breakpoints
