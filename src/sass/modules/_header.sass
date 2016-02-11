@@ -1,0 +1,26 @@
+.page_header
+  position: absolute
+  top: 27px
+  left: 0
+  +size(100%, 48px)
+  &_content
+    @extend .container
+
+    .logo
+      +pull-left()
+
+
+    .main_menu
+      +pull-right()
+      .items
+        @extend .list-unstyled
+        .item
+          display: inline-block
+          padding: 1px 12px
+          a
+            line-height: 48px
+            font-size: 18px
+            color: $brand-secondary
+            text-decoration: none
+            &:hover
+              color: darken($brand-secondary, 15%)
