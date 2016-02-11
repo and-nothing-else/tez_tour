@@ -1,10 +1,48 @@
+.section--codex
+  padding-bottom: 77px
+  .section_head
+    margin-bottom: 52px
+
+
 .codex_tiles
 
   .tile
-    &__bg
+    &_content
       background: $brand-primary center no-repeat
       background-size: cover
-      height: 192px
+      position: relative
+      &__header
+        font:
+          size: 22px
+          weight: normal
+        text-transform: uppercase
+        line-height: 30px
+        position: absolute
+        bottom: 13px
+        left: 30px
+
+        +media-breakpoint-up(lg)
+          font-size: 25px
+
+    &--customer
+      .tile_content
+        background-image: url("/images/Codex1.jpeg")
+    &--enthusiasm
+      .tile_content
+        color: white
+        background-image: url("/images/Codex2.jpeg")
+    &--decency
+      .tile_content
+        background-image: url("/images/Codex3.jpeg")
+    &--proffesionalism
+      .tile_content
+        color: white
+        background-image: url("/images/Codex4.jpeg")
+    &--teamwork
+      .tile_content
+        color: white
+        background-image: url("/images/Codex5.jpeg")
+
 
 
   // tile grid
@@ -13,12 +51,16 @@
     +make-col(10px)
     +make-col-span(12)
     margin-bottom: 12px
+    &_content
+      height: 192px
 
   +media-breakpoint-up(sm)
     .tile
       +make-col-span(6)
       &--proffesionalism
         +make-col-span(12)
+      &_content
+        height: 252px
 
   +media-breakpoint-only(sm)
     .tile
@@ -34,9 +76,18 @@
       +make-col-span(4)
       &--proffesionalism
         +make-col-span(8)
+      &_content
+        height: 264px
+
+  +media-breakpoint-up(lg)
+    .tile
+      &_content
+        height: 342px
 
   +media-breakpoint-up(xl)
     +make-row(30px)
     .tile
       +make-col(30px)
       margin-bottom: 14px
+      &_content
+        height: 395px

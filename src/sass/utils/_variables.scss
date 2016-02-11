@@ -86,7 +86,7 @@ $border-width:               1px !default;
 // Settings for the `<body>` element.
 
 $body-bg:                    #fff !default;
-$body-color:                 $gray-dark !default;
+$body-color:                 black !default;
 
 
 // Links
@@ -112,7 +112,7 @@ $grid-breakpoints: (
   // Medium screen / tablet
   md: 768px,
   // Large screen / desktop
-  lg: 992px,
+  lg: 940px,
   // Extra large screen / wide desktop
   xl: 1200px
 ) !default;
