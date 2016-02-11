@@ -1,11 +1,12 @@
 $headerBgColor: #041b3e
+$headerTransparentBgColor: transparentize($headerBgColor, .05)
+$animationDuration: .3s
 
 
 .page_header
-  position: absolute
-  top: 27px
   left: 0
-  +size(100%, 48px)
+  +size(100%, 80px)
+  z-index: 4096
   &_content
     @extend .container
 
@@ -29,6 +30,18 @@ $headerBgColor: #041b3e
             text-decoration: none
             &:hover
               color: darken($brand-secondary, 15%)
+  +media-breakpoint-up(lg)
+    position: absolute
+    top: 11px
+    padding-top: 16px
+    padding-bottom: 16px
+    background: transparentize($headerBgColor, 1)
+    transition: background $animationDuration ease
+    &.fixed
+      position: fixed
+      top: 0
+      background: $headerTransparentBgColor
+
   +media-breakpoint-down(md)
     position: fixed
     top: 0
@@ -65,11 +78,11 @@ $headerBgColor: #041b3e
         .items
           position: absolute
           right: 0
-          background: rgba(4, 27, 62, .95)
+          background: $headerTransparentBgColor
           visibility: hidden
           opacity: 0
           transform: scale(.8) rotateX(-80deg)
-          transition: all .3s ease
+          transition: all $animationDuration ease
           transform-origin: right top
           .item
             display: block
