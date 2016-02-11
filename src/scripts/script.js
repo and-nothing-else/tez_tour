@@ -44,7 +44,10 @@ class App {
 
     _initMainMenu() {
         let self = this;
-        this.$mainMenuTrigger.on("click", () => this.$mainMenu.toggleClass("open"));
+        this.$mainMenuTrigger.on("click", e => {
+            e.stopPropagation();
+            this.$mainMenu.toggleClass("open");
+        });
         this.$mainMenuLink.on("click", function(){
             let sectionID = $(this).attr("href").replace("#", "");
             self.scroll2Section(sectionID);
@@ -52,6 +55,7 @@ class App {
             self.menuClicked = true;
             setTimeout(() => self.menuClicked = false, 500);
         });
+        $("body").on("click", () => this.$mainMenu.removeClass("open"));
     }
 
     findSectionPositions() {
@@ -78,9 +82,11 @@ class App {
                 let scrollPosition = $(window).scrollTop();
                 let bp = Math.max(...this.sectionBreakPoints.filter(v => v <= scrollPosition + fp));
                 for (let s in this.sectionPositions) {
-                    if (this.sectionPositions[s] == bp) {
-                        newSection = s;
-                        break;
+                    if(this.sectionPositions.hasOwnProperty(s)) {
+                        if (this.sectionPositions[s] == bp) {
+                            newSection = s;
+                            break;
+                        }
                     }
                 }
                 if (newSection != this.currentSection) {

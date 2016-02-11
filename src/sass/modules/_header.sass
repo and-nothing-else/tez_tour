@@ -100,12 +100,19 @@ $headerTransparentBgColor: transparentize($headerBgColor, .05)
           transform-origin: right top
           .item
             display: block
-            padding: 0 37px
-            text-transform: uppercase
-            white-space: nowrap
-            &:hover, &.active
-              background: #0d2a59
-              border-right: $border-width solid $brand-primary
+            padding: 0
+            a
+              display: block
+              padding: 0 37px
+              text-transform: uppercase
+              white-space: nowrap
+              border-right: $border-width solid transparent
+              &:hover, &.active
+                background: #0d2a59
+                border-right-color: $brand-primary
+
+        &__marker
+          display: none
 
         &.open
           .items
