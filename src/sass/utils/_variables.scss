@@ -43,7 +43,7 @@ $brand-danger:              #d9534f !default;
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-$enable-flex:               false !default;
+$enable-flex:               true !default;
 $enable-rounded:            false !default;
 $enable-shadows:            false !default;
 $enable-gradients:          false !default;
@@ -108,7 +108,7 @@ $grid-breakpoints: (
   // Extra small screen / phone
   xs: 0,
   // Small screen / phone
-  sm: 544px,
+  sm: 480px,
   // Medium screen / tablet
   md: 768px,
   // Large screen / desktop

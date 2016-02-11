@@ -1,0 +1,42 @@
+.codex_tiles
+
+  .tile
+    &__bg
+      background: $brand-primary center no-repeat
+      background-size: cover
+      height: 192px
+
+
+  // tile grid
+  +make-row(10px)
+  .tile
+    +make-col(10px)
+    +make-col-span(12)
+    margin-bottom: 12px
+
+  +media-breakpoint-up(sm)
+    .tile
+      +make-col-span(6)
+      &--proffesionalism
+        +make-col-span(12)
+
+  +media-breakpoint-only(sm)
+    .tile
+      &--decency
+        order: 4
+      &--proffesionalism
+        order: 3
+      &--teamwork
+        order: 5
+
+  +media-breakpoint-up(md)
+    .tile
+      +make-col-span(4)
+      &--proffesionalism
+        +make-col-span(8)
+
+  +media-breakpoint-up(xl)
+    +make-row(30px)
+    .tile
+      +make-col(30px)
+      margin-bottom: 14px
