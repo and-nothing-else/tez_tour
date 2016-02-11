@@ -1,0 +1,49 @@
+$footer-link-color: #a8d4f0
+
+.page_footer
+  background: #021729
+  color: #fbefd8
+  padding-top: 32px
+  padding-bottom: 16px
+  +media-breakpoint-down(sm)
+    text-align: center
+  &_content
+    @extend .container
+    .info
+      +make-row()
+      &__copyright
+        +make-col()
+        +make-col-span(12)
+        +media-breakpoint-up(md)
+          +make-col-span(7)
+        +media-breakpoint-down(xs)
+          .note
+            display: block
+            margin-top: 6px
+        +media-breakpoint-down(sm)
+          margin-bottom: 17px
+      &__contact
+        +make-col()
+        +make-col-span(12)
+        +media-breakpoint-up(md)
+          +make-col-span(5)
+          text-align: right
+          .phone
+            margin-top: -7px
+        .phone
+          span
+            font-size: 26px
+            line-height: 30px
+            border-bottom: 1px dotted #7f8381
+        .email
+          span
+            padding-left: 30px
+            background: url("/src/data-images/mail.png") left center no-repeat
+
+  p
+    margin-bottom: 12px
+  a
+    color: $footer-link-color
+    text-decoration: none
+    &:hover
+      color: darken($footer-link-color, 15%)
