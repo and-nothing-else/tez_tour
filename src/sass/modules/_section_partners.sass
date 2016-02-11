@@ -1,6 +1,7 @@
 .section--partners
   background: url("/images/partnersBG.jpg") center no-repeat
   background-size: cover
+  padding-bottom: 96px
 
   .section_head
     margin-bottom: 34px
@@ -26,3 +27,14 @@
       &__image
         +make-col()
         +make-col-span(5)
+
+  .partner_list
+    background: transparentize(white, .2)
+    text-align: center
+    padding: 37px 20px
+    &__header
+      font:
+        weight: 600
+        size: 26px
+    &__subheader
+      font-size: 22px
