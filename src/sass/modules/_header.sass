@@ -1,3 +1,6 @@
+$headerBgColor: #041b3e
+
+
 .page_header
   position: absolute
   top: 27px
@@ -9,9 +12,11 @@
     .logo
       +pull-left()
 
-
     .main_menu
       +pull-right()
+
+      .trigger
+        display: none
       .items
         @extend .list-unstyled
         .item
@@ -24,3 +29,59 @@
             text-decoration: none
             &:hover
               color: darken($brand-secondary, 15%)
+  +media-breakpoint-down(md)
+    position: fixed
+    top: 0
+    background: $headerBgColor
+    height: 70px
+
+    &_content
+      padding-right: 0
+      .logo
+        height: 40px
+        margin-top: 13px
+
+      .main_menu
+        position: relative
+        perspective: 600px
+        .trigger
+          display: block
+          +size(70px)
+          background: $brand-primary
+          border: solid $headerBgColor
+          border-width: 26px 18px 25px
+          &:before, &:after
+            content: ''
+            display: block
+            +size(34px, 5px)
+            background: $headerBgColor
+            position: absolute
+            left: 18px
+          &:before
+            top: 29px
+          &:after
+            top: 37px
+
+        .items
+          position: absolute
+          right: 0
+          background: rgba(4, 27, 62, .95)
+          visibility: hidden
+          opacity: 0
+          transform: scale(.8) rotateX(-80deg)
+          transition: all .3s ease
+          transform-origin: right top
+          .item
+            display: block
+            padding: 0 37px
+            text-transform: uppercase
+            white-space: nowrap
+            &:hover, &.active
+              background: #0d2a59
+              border-right: $border-width solid $brand-primary
+
+        &.open
+          .items
+            opacity: 1
+            visibility: visible
+            transform: scale(1) rotateX(0deg)
