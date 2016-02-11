@@ -19,6 +19,7 @@ class App {
         this.$mainMenu = $(".main_menu");
         this.$mainMenuLink = this.$mainMenu.find(".main_menu__link");
         this.$mainMenuTrigger = this.$mainMenu.find(".trigger");
+        this.$mainMenuActiveMarker = this.$mainMenu.find(".main_menu__marker");
     }
 
     _initHeader() {
@@ -42,7 +43,9 @@ class App {
         let self = this;
         this.$mainMenuTrigger.on("click", () => this.$mainMenu.toggleClass("open"));
         this.$mainMenuLink.on("click", function(){
-            self.scroll2Section($(this).attr("href").replace("#", ""));
+            let sectionID = $(this).attr("href").replace("#", "");
+            self.scroll2Section(sectionID);
+            self.setActiveMenuItem(sectionID);
         });
     }
 
@@ -50,13 +53,31 @@ class App {
 
     }
 
-    scroll2Section(sectionID){
+    scroll2Section(sectionID) {
         let $section = $("#section_" + sectionID),
             scrollPosition = $section.offset().top - this.headerHeight;
         $("html,body").animate({
             scrollTop: scrollPosition,
             duration: this.scrollDuration
         });
+    }
+
+    setActiveMenuItem(sectionID) {
+        let $menuItem = this.$mainMenuLink.filter(`[href="#${sectionID}"]`);
+        if($menuItem.length > 0) {
+            let menuItemWidth = $menuItem.width(),
+                menuItemLeft = $menuItem.offset().left - this.$mainMenu.offset().left;
+            this.$mainMenuLink.removeClass("active");
+            $menuItem.addClass("active");
+            this.$mainMenuActiveMarker
+                .removeClass("outside")
+                .css({
+                    left: menuItemLeft,
+                    width: menuItemWidth
+                });
+        } else {
+            this.$mainMenuActiveMarker.addClass("outside");
+        }
     }
 }
 

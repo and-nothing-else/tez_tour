@@ -1,6 +1,5 @@
 $headerBgColor: #041b3e
 $headerTransparentBgColor: transparentize($headerBgColor, .05)
-$animationDuration: .3s
 
 
 .page_header
@@ -15,6 +14,7 @@ $animationDuration: .3s
 
     .main_menu
       +pull-right()
+      position: relative
 
       .trigger
         display: none
@@ -30,6 +30,21 @@ $animationDuration: .3s
             text-decoration: none
             &:hover
               color: darken($brand-secondary, 15%)
+            &.active
+              color: white
+      &__marker
+        position: absolute
+        top: -16px
+        left: 0
+        +size(100px, $border-width)
+        background: $brand-primary
+        opacity: 1
+        transition: all $animationDuration ease
+        &.outside
+          left: -100px
+          height: 0
+          opacity: 0
+
   +media-breakpoint-up(lg)
     position: absolute
     top: 11px
@@ -55,7 +70,6 @@ $animationDuration: .3s
         margin-top: 13px
 
       .main_menu
-        position: relative
         perspective: 600px
         .trigger
           display: block
