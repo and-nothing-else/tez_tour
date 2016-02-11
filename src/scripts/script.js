@@ -6,6 +6,7 @@ class App {
         this._initElements();
         this.scrollDuration = 3000;
 
+        this.findSectionPositions();
         this._initHeader();
         this._initMainMenu();
         this._initScrollNav();
@@ -20,6 +21,8 @@ class App {
         this.$mainMenuLink = this.$mainMenu.find(".main_menu__link");
         this.$mainMenuTrigger = this.$mainMenu.find(".trigger");
         this.$mainMenuActiveMarker = this.$mainMenu.find(".main_menu__marker");
+
+        this.$sections = $(".section");
     }
 
     _initHeader() {
@@ -46,18 +49,52 @@ class App {
             let sectionID = $(this).attr("href").replace("#", "");
             self.scroll2Section(sectionID);
             self.setActiveMenuItem(sectionID);
+            self.menuClicked = true;
+            setTimeout(() => self.menuClicked = false, 500);
         });
     }
 
-    _initScrollNav() {
+    findSectionPositions() {
+        let self = this;
+        this.sectionPositions = {};
+        this.sectionBreakPoints = [];
+        this.$sections.each(function(){
+            let sectionID = $(this).attr("id").replace("section_", ""),
+                bp = $(this).offset().top - self.headerHeight;
+            self.sectionPositions[sectionID] = bp;
+            self.sectionBreakPoints.push(bp);
+        });
+        self.sectionBreakPoints.sort((a, b) => a - b);
+    }
 
+    _initScrollNav() {
+        this.findSectionPositions();
+        this.currentSection = '';
+        this.menuClicked = false;
+        let fp = $(window).height() / 4,
+            newSection = '';
+        $(window).scroll(() => {
+            if (!this.menuClicked) {
+                let scrollPosition = $(window).scrollTop();
+                let bp = Math.max(...this.sectionBreakPoints.filter(v => v <= scrollPosition + fp));
+                for (let s in this.sectionPositions) {
+                    if (this.sectionPositions[s] == bp) {
+                        newSection = s;
+                        break;
+                    }
+                }
+                if (newSection != this.currentSection) {
+                    this.setActiveMenuItem(newSection);
+                    this.currentSection = newSection;
+                }
+            }
+        });
+        $(window).resize(this.findSectionPositions);
     }
 
     scroll2Section(sectionID) {
-        let $section = $("#section_" + sectionID),
-            scrollPosition = $section.offset().top - this.headerHeight;
         $("html,body").animate({
-            scrollTop: scrollPosition,
+            scrollTop: this.sectionPositions[sectionID],
             duration: this.scrollDuration
         });
     }
