@@ -69,6 +69,11 @@ function initMap() {
             mapTypeControl: false
         }
     );
+    new google.maps.Marker({
+        position: coordinates,
+        map: map,
+        icon: '/images/map_marker.png'
+    });
 }
 
 
