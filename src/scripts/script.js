@@ -95,7 +95,7 @@ class App {
                 }
             }
         });
-        $(window).resize(this.findSectionPositions);
+        $(window).resize(() => this.findSectionPositions());
     }
 
     scroll2Section(sectionID) {
