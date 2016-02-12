@@ -40,13 +40,25 @@
     &__subheader
       font-size: 22px
 
-    .iosslider
-      position: relative
-      top: 0
-      left: 0
-      overflow: hidden
-      .slider
-        +size(100%)
-        .slide
-          float: left
-          +size(185px, 85px)
+    .owl-carousel
+      .slide
+        img
+          max-width: 100%
+
+      .owl-controls
+        position: absolute
+        top: 21px
+        left: 0
+        +size(100%, 0)
+        .owl-buttons
+          & > *
+            position: absolute
+            +size(22px, 40px)
+            background: center no-repeat
+            top: 0
+          .owl-prev
+            background-image: url("/src/data-images/slider_prev.png")
+            left: -10px
+          .owl-next
+            background-image: url("/src/data-images/slider_next.png")
+            right: -10px
