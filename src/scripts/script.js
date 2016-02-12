@@ -1,4 +1,4 @@
-import $ from 'jquery'
+import initCarousel from './_carousel'
 
 
 class App {
@@ -127,4 +127,5 @@ class App {
 
 $(function(){
     new App();
+    initCarousel();
 });

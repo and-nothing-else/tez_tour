@@ -11,6 +11,8 @@ import autoprefixer from 'gulp-autoprefixer'
 import sourcemaps from 'gulp-sourcemaps'
 import minifyCSS from 'gulp-minify-css'
 import inline_base64 from 'gulp-inline-base64'
+import concat from 'gulp-concat'
+import merge from 'merge-stream'
 
 import source from 'vinyl-source-stream'
 import buffer from 'vinyl-buffer'
@@ -29,6 +31,8 @@ const
     },
     files = {
         vendor: {
+            jquery: `${dirs.bower}/jquery/dist/jquery.min.js`,
+            owlCarouselStyles: `${dirs.npm}/owlcarousel/owl-carousel/owl.carousel.css`
         },
         source: {
             templates: `${dirs.src}/*.jade`,
@@ -61,6 +65,7 @@ gulp.task('clean', () => {
 
 gulp.task('copy', () => {
     gulp.src([
+        files.vendor.jquery
     ]).pipe(gulp.dest(files.dest.vendor));
     gulp.src(`${dirs.src_images}/**/*.*`)
         .pipe(gulp.dest(files.dest.images))
@@ -77,7 +82,7 @@ gulp.task('jade', () => {
 });
 
 gulp.task('sass', () => {
-    return sass(files.source.style, {sourcemap: !production})
+    let sassStream = sass(files.source.style, {sourcemap: !production})
         .on('error', sass.logError)
         .pipe(inline_base64({
             maxSize: 320 * 1200,
@@ -88,10 +93,14 @@ gulp.task('sass', () => {
             cascade: !production
         }))
         .pipe(production ? minifyCSS({compatibility: 'ie8'}) : gutil.noop())
-        .pipe(production ? gutil.noop() : sourcemaps.write())
+        .pipe(production ? gutil.noop() : sourcemaps.write());
+    let cssStream = gulp.src(files.vendor.owlCarouselStyles);
+    return merge(sassStream, cssStream)
+        .pipe(concat('style.css'))
         .pipe(gulp.dest(files.dest.styles))
         .pipe(production ? gutil.noop() : connect.reload());
 });
+
 
 gulp.task('compile', () => {
     return browserify(
