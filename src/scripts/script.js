@@ -1,4 +1,5 @@
 import initCarousel from './_carousel'
+import initMap from './_map'
 
 
 class App {
@@ -128,4 +129,5 @@ class App {
 $(function(){
     new App();
     initCarousel();
+    initMap();
 });
