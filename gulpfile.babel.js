@@ -88,15 +88,15 @@ gulp.task('sass', () => {
             maxSize: 320 * 1200,
             debug: !production
         }))
+        .pipe(production ? gutil.noop() : sourcemaps.write());
+    let cssStream = gulp.src(files.vendor.owlCarouselStyles);
+    return merge(sassStream, cssStream)
+        .pipe(concat('style.css'))
         .pipe(autoprefixer({
             browsers: ['> 5%', 'last 2 versions', 'IE 8'],
             cascade: !production
         }))
         .pipe(production ? minifyCSS({compatibility: 'ie8'}) : gutil.noop())
-        .pipe(production ? gutil.noop() : sourcemaps.write());
-    let cssStream = gulp.src(files.vendor.owlCarouselStyles);
-    return merge(sassStream, cssStream)
-        .pipe(concat('style.css'))
         .pipe(gulp.dest(files.dest.styles))
         .pipe(production ? gutil.noop() : connect.reload());
 });
