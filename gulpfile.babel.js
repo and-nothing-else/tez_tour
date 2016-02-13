@@ -52,9 +52,10 @@ const
 gulp.task('server', function() {
     connect.server({
       root: 'dist',
-      livereload: true
+      livereload: !production
     });
 });
+
 
 gulp.task('clean', () => {
     for(let i of Object.keys(files.dest)){
@@ -72,6 +73,7 @@ gulp.task('copy', () => {
         .pipe(production ? gutil.noop() : connect.reload());
 });
 
+
 gulp.task('jade', () => {
     gulp.src(files.source.templates)
         .pipe(jade({
@@ -80,6 +82,7 @@ gulp.task('jade', () => {
         .pipe(gulp.dest(dirs.dest))
         .pipe(production ? gutil.noop() : connect.reload());
 });
+
 
 gulp.task('sass', () => {
     let sassStream = sass(files.source.style, {sourcemap: !production})

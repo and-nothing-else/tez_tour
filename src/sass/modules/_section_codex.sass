@@ -11,6 +11,8 @@
       background: $brand-primary center no-repeat
       background-size: cover
       position: relative
+      &__placeholder
+        @extend %full-size
       &__header
         font:
           size: 22px
@@ -23,6 +25,16 @@
 
         +media-breakpoint-up(lg)
           font-size: 25px
+
+      &__overlay
+        @extend %full-size
+        background: transparentize($brand-dark, .15)
+        padding: 32px
+        color: $brand-secondary
+        &_header
+          color: white
+        &.alter
+          background: transparentize(#514a42, .15)
 
     &--customer
       .tile_content
@@ -91,3 +103,19 @@
       margin-bottom: 14px
       &_content
         height: 395px
+
+
+
+// animation on hover
+.tile_content
+  overflow: hidden
+  &__placeholder
+    transform: translate(0, 0)
+    transition: all $animationDuration ease
+  &__overlay
+    transition: all $animationDuration ease
+    transform: translate(100%, 0)
+  &:hover &__overlay
+    transform: translate(0, 0)
+  &:hover &__placeholder
+    transform: translate(-100%, 0)
