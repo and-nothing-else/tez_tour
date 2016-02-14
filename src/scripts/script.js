@@ -10,6 +10,7 @@ class App {
         this.findSectionPositions();
         this._initHeader();
         this._initMainMenu();
+        this._initNav();
         this._initScrollNav();
     }
 
@@ -17,6 +18,8 @@ class App {
         this.$header = $(".page_header");
         this.headerHeight = this.$header.outerHeight();
         this.headerDefaultPos = this.$header.offset().top;
+
+        this.$navLinks = $(".nav_link");
 
         this.$mainMenu = $(".main_menu");
         this.$mainMenuLink = this.$mainMenu.find(".main_menu__link");
@@ -44,19 +47,23 @@ class App {
     }
 
     _initMainMenu() {
-        let self = this;
         this.$mainMenuTrigger.on("click", e => {
             e.stopPropagation();
             this.$mainMenu.toggleClass("open");
         });
-        this.$mainMenuLink.on("click", function(){
+        $("body").on("click", () => this.$mainMenu.removeClass("open"));
+    }
+
+    _initNav() {
+        let self = this;
+        this.$navLinks.on("click", function(e){
             let sectionID = $(this).attr("href").replace("#", "");
+            e.preventDefault();
             self.scroll2Section(sectionID);
             self.setActiveMenuItem(sectionID);
             self.menuClicked = true;
             setTimeout(() => self.menuClicked = false, 500);
         });
-        $("body").on("click", () => this.$mainMenu.removeClass("open"));
     }
 
     findSectionPositions() {
@@ -101,7 +108,7 @@ class App {
 
     scroll2Section(sectionID) {
         $("html,body").animate({
-            scrollTop: this.sectionPositions[sectionID],
+            scrollTop: this.sectionPositions[sectionID] || 0,
             duration: this.scrollDuration
         });
     }
