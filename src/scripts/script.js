@@ -12,10 +12,15 @@ class App {
         this._initMainMenu();
         this._initNav();
         this._initScrollNav();
+        $(window).load(() => {
+            this.findSectionPositions();
+            this.setHeaderPosition();
+        });
     }
 
     _initElements() {
         this.$header = $(".page_header");
+        this.headerFixed = false;
         this.headerHeight = this.$header.outerHeight();
         this.headerDefaultPos = this.$header.offset().top;
 
@@ -29,21 +34,22 @@ class App {
         this.$sections = $(".section");
     }
 
-    _initHeader() {
-        let headerFixed = false;
-        $(window).scroll(() => {
-            if($(window).scrollTop() >= this.headerDefaultPos) {
-                if(!headerFixed){
-                    this.$header.addClass("fixed");
-                    headerFixed = true;
-                }
-            } else {
-                if(headerFixed){
-                    this.$header.removeClass("fixed");
-                    headerFixed = false;
-                }
+    setHeaderPosition() {
+        if($(window).scrollTop() >= this.headerDefaultPos) {
+            if(!this.headerFixed){
+                this.$header.addClass("fixed");
+                this.headerFixed = true;
             }
-        });
+        } else {
+            if(this.headerFixed){
+                this.$header.removeClass("fixed");
+                this.headerFixed = false;
+            }
+        }
+    }
+
+    _initHeader() {
+        $(window).scroll(() => this.setHeaderPosition());
     }
 
     _initMainMenu() {
