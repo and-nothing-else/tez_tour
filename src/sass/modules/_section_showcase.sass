@@ -1,3 +1,10 @@
+@keyframes next_link
+  0%
+    transform: translate(0, 0)
+  50%
+    transform: translate(0, -5px)
+
+
 .section--showcase
   min-height: 100%
   background: #041032 url("/images/city.jpeg") center no-repeat
@@ -18,3 +25,13 @@
       padding-top: 33.9vh
     +media-breakpoint-up(lg)
       width: 64%
+
+  .next_section
+    display: block
+    +size(30px, 23px)
+    background: url("/src/data-images/link_next.png") no-repeat
+    position: absolute
+    bottom: 21px
+    left: 50%
+    margin-left: -15px
+    animation: next_link 1.3s ease infinite
