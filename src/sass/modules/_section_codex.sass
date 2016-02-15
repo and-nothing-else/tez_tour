@@ -33,6 +33,7 @@
         background: transparentize($brand-dark, .15)
         padding: 32px
         color: $brand-secondary
+        overflow: hidden
         &_header
           color: white
         &.alter
@@ -61,6 +62,7 @@
 
   // tile grid
   +make-row(10px)
+  position: relative
   .tile
     +make-col(10px)
     +make-col-span(12)
@@ -79,11 +81,10 @@
   +media-breakpoint-only(sm)
     .tile
       &--decency
-        order: 4
-      &--proffesionalism
-        order: 3
+        position: absolute
+        top: 528px
       &--teamwork
-        order: 5
+        +make-col-offset(6)
 
   +media-breakpoint-up(md)
     .tile
