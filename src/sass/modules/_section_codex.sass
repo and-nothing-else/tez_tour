@@ -11,6 +11,7 @@
       background: $brand-primary center no-repeat
       background-size: cover
       position: relative
+      overflow: hidden
       &__placeholder
         @extend %full-size
       &__header
@@ -28,6 +29,7 @@
 
       &__overlay
         @extend %full-size
+        left: 100%
         background: transparentize($brand-dark, .15)
         padding: 32px
         color: $brand-secondary
@@ -103,29 +105,3 @@
       margin-bottom: 14px
       &_content
         height: 395px
-
-
-
-// animation on hover
-.tile
-  &_content
-    overflow: hidden
-    //&__placeholder
-    //  transform: translate(0, 0)
-    //  transition: all $animationDuration ease
-    //&__overlay
-    //  transition: all $animationDuration ease
-    //  transform: translate(-100%, 0)
-  //&.dir0 &_content__overlay
-  //  transform: translate(0, -100%)
-  //&.dir1 &_content__overlay
-  //  transform: translate(100%, 0)
-  //&.dir2 &_content__overlay
-  //  transform: translate(0, 100%)
-  //&.hover  &_content__overlay
-  //  transform: translate(0, 0)
-
-
-
-    //&.hover &__placeholder
-    //  transform: translate(100%, 0)
