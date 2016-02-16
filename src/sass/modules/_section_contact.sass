@@ -3,6 +3,7 @@
 
   .section_head
     margin-bottom: 40px
+    +zoom_out()
 
   .info
     +make-row()
@@ -55,3 +56,27 @@
       height: 347px
     +media-breakpoint-up(lg)
       height: 450px
+
+
+
+  .section_content
+    perspective: 600px
+    .info
+      &__address, &__person
+        transition: all .8s ease 1s
+        transform: rotateY(0deg) translate(0, 0)
+        backface-visibility: hidden
+        opacity: 1
+      &__address
+        transform-origin: left center
+      &__person
+        transform-origin: right center
+
+    &.out
+      .info
+        &__address
+          transform: rotateY(90deg) translate(-100px, 0)
+          opacity: 0
+        &__person
+          transform: rotateY(-90deg) translate(100px, 0)
+          opacity: 0

@@ -3,6 +3,7 @@
   padding-bottom: 97px
   .section_head
     margin-bottom: 49px
+    +zoom_out()
   .section_content
     &_inner
       +media-breakpoint-up(md)
@@ -48,3 +49,29 @@
           &--3
             +pull-right()
             width: 52.5%
+
+    // show effect
+    perspective: 600px
+    .description_list__item
+      transform: translate(0, 0)
+      opacity: 1
+      transition: all .5s ease .5s
+      &--2
+        transition-delay: 1s
+      &--3
+        transition-delay: 1.5s
+    .card
+      transform: rotateX(0deg) scale(1)
+      opacity: 1
+      backface-visibility: hidden
+      transition: all 1s ease 2s
+
+    &.out
+      .description_list__item
+        transform: translate(100%, 0)
+        &--2
+          transform: translate(-100%, 0)
+        opacity: 0
+      .card
+        transform: rotateX(180deg) scale(.6)
+        opacity: 0

@@ -8,6 +8,15 @@ class App {
         this.scrollDuration = 3000;
         this.tileAnimationDuration = 300;
 
+        this.shown = {
+            showcase: false,
+            about: false,
+            partners: false,
+            community: false,
+            codex: false,
+            contact: false
+        };
+
         this.findSectionPositions();
         this._initHeader();
         this._initMainMenu();
@@ -84,6 +93,7 @@ class App {
         this.$sections.each(function(){
             let sectionID = $(this).attr("id").replace("section_", ""),
                 bp = $(this).offset().top - self.headerHeight;
+            if (bp < 0) bp = 0;
             self.sectionPositions[sectionID] = bp;
             self.sectionBreakPoints.push(bp);
         });
@@ -97,24 +107,45 @@ class App {
         let fp = $(window).height() / 4,
             newSection = '';
         $(window).scroll(() => {
-            if (!this.menuClicked) {
-                let scrollPosition = $(window).scrollTop();
-                let bp = Math.max(...this.sectionBreakPoints.filter(v => v <= scrollPosition + fp));
-                for (let s in this.sectionPositions) {
-                    if(this.sectionPositions.hasOwnProperty(s)) {
-                        if (this.sectionPositions[s] == bp) {
-                            newSection = s;
-                            break;
-                        }
+            let scrollPosition = $(window).scrollTop();
+            let bp = Math.max(...this.sectionBreakPoints.filter(v => v <= scrollPosition + fp));
+            for (let s in this.sectionPositions) {
+                if(this.sectionPositions.hasOwnProperty(s)) {
+                    if (this.sectionPositions[s] == bp) {
+                        newSection = s;
+                        break;
                     }
                 }
+            }
+            if (!this.menuClicked) {
                 if (newSection != this.currentSection) {
                     this.setActiveMenuItem(newSection);
                     this.currentSection = newSection;
                 }
             }
+            if (!this.shown[newSection]) {
+                $(`.section--${newSection} .out`).removeClass("out");
+                this.shown[newSection] = true;
+                if(newSection == 'codex') {
+                    let tilesQueue = [];
+                    for (let i = 0; i < this.$tiles.size(); i++) tilesQueue.push(i);
+                    tilesQueue.sort(() => .5 - Math.random());
+                    let ShowTile = (arr) => {
+                        let tileIndex = arr.pop(),
+                            $tile = this.$tiles.eq(tileIndex);
+                        $tile.removeClass("tile_out");
+                        setTimeout(() => {
+                            if (arr.length) {
+                                ShowTile(arr);
+                            }
+                        }, 500);
+                    };
+                    ShowTile(tilesQueue);
+                }
+            }
         });
         $(window).resize(() => this.findSectionPositions());
+        $(window).trigger("scroll");
     }
 
     scroll2Section(sectionID) {

@@ -5,6 +5,7 @@
 
   .section_head
     margin-bottom: 34px
+    +zoom_out()
 
   .info
     +make-row()
@@ -62,3 +63,31 @@
           .owl-next
             background-image: url("/src/data-images/slider_next.png")
             right: -10px
+
+
+  .section_content
+    perspective: 600px
+    .info
+      &__text, &__image
+        transition: all .8s ease .5s
+        transform: rotateY(0deg) translate(0, 0)
+        backface-visibility: hidden
+        opacity: 1
+      &__text
+        transform-origin: left center
+      &__image
+        transform-origin: right center
+    .partner_list
+      opacity: 1
+      transition: all 1s ease 1s
+
+    &.out
+      .info
+        &__text
+          transform: rotateY(90deg) translate(-100px, 0)
+          opacity: 0
+        &__image
+          transform: rotateY(-90deg) translate(100px, 0)
+          opacity: 0
+      .partner_list
+        opacity: 0

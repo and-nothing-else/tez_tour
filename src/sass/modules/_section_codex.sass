@@ -2,6 +2,7 @@
   padding-bottom: 77px
   .section_head
     margin-bottom: 52px
+    +zoom_out()
 
 
 .codex_tiles
@@ -106,3 +107,11 @@
       margin-bottom: 14px
       &_content
         height: 395px
+
+
+  .tile_content
+    transform: scale(1) rotateY(0deg)
+    backface-visibility: hidden
+    transition: all .5s ease
+    &.tile_out
+      transform: scale(.5) rotateY(180deg)
