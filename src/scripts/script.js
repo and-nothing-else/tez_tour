@@ -28,6 +28,7 @@ class App {
             this.findSectionPositions();
             this.setHeaderPosition();
         });
+        $(window).resize(() => this.findSectionPositions());
     }
 
     _initElements() {
@@ -88,6 +89,7 @@ class App {
 
     findSectionPositions() {
         let self = this;
+        this.windowWidth = $(window).width();
         this.sectionPositions = {};
         this.sectionBreakPoints = [];
         this.$sections.each(function(){
@@ -144,7 +146,6 @@ class App {
                 }
             }
         });
-        $(window).resize(() => this.findSectionPositions());
         $(window).trigger("scroll");
     }
 
@@ -174,7 +175,8 @@ class App {
     }
 
     _initTiles() {
-        let animationDuration = this.tileAnimationDuration;
+        let self = this,
+            animationDuration = this.tileAnimationDuration;
         function getTileDirection($el, mouseX, mouseY) {
             let w = $el.width(),
                 h = $el.height(),
@@ -186,25 +188,37 @@ class App {
 
         this.$tiles.hover(
             function(e) {
-                let $el = $(this),
-                    $overlay = $el.find(".tile_content__overlay"),
-                    overlayStyles = {left: '-100%', top: 0},
-                    $placeHolder = $el.find(".tile_content__placeholder"),
-                    placeholderStyles = {left: '100%', top: 0},
-                    direction = getTileDirection($el, e.pageX, e.pageY);
+                if(self.windowWidth > 768) {
+                    let $el = $(this),
+                        $overlay = $el.find(".tile_content__overlay"),
+                        overlayStyles = {left: '-100%', top: 0},
+                        $placeHolder = $el.find(".tile_content__placeholder"),
+                        placeholderStyles = {left: '100%', top: 0},
+                        direction = getTileDirection($el, e.pageX, e.pageY);
 
-                switch(direction) {
-                    case 0: overlayStyles = {left: 0, top: '-100%'}; placeholderStyles = {left: 0, top: '100%'}; break;
-                    case 1: overlayStyles = {left: '100%', top: 0}; placeholderStyles = {left: '-100%', top: 0}; break;
-                    case 2: overlayStyles = {left: 0, top: '100%'}; placeholderStyles = {left: 0, top: '-100%'}; break;
-                }
+                    switch (direction) {
+                        case 0:
+                            overlayStyles = {left: 0, top: '-100%'};
+                            placeholderStyles = {left: 0, top: '100%'};
+                            break;
+                        case 1:
+                            overlayStyles = {left: '100%', top: 0};
+                            placeholderStyles = {left: '-100%', top: 0};
+                            break;
+                        case 2:
+                            overlayStyles = {left: 0, top: '100%'};
+                            placeholderStyles = {left: 0, top: '-100%'};
+                            break;
+                    }
 
-                if(e.type == "mouseenter" || e.type == "mouseover") {
-                    $overlay.stop().css(overlayStyles).animate({left: 0, top: 0}, animationDuration);
-                    $placeHolder.stop().css({left: 0, top: 0}).animate(placeholderStyles, animationDuration);
-                } else {
-                    $overlay.stop().css({left: 0, top: 0}).animate(overlayStyles, animationDuration);
-                    $placeHolder.stop().css(placeholderStyles).animate({left: 0, top: 0}, animationDuration);
+                    if (e.type == "mouseenter" || e.type == "mouseover") {
+                        $overlay.stop().css(overlayStyles).animate({left: 0, top: 0}, animationDuration);
+                        $placeHolder.stop().css({left: 0, top: 0}).animate(placeholderStyles, animationDuration);
+                    } else {
+                        $overlay.stop().css({left: 0, top: 0}).animate(overlayStyles, animationDuration);
+                        $placeHolder.stop().css(placeholderStyles).animate({left: 0, top: 0}, animationDuration);
+
+                    }
                 }
             }
         );
