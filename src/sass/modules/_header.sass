@@ -28,9 +28,7 @@ $headerTransparentBgColor: transparentize($headerBgColor, .05)
             font-size: 18px
             color: $brand-secondary
             text-decoration: none
-            &:hover
-              color: darken($brand-secondary, 15%)
-            &.active
+            &:hover, &.active
               color: white
       &__marker
         position: absolute
@@ -56,6 +54,8 @@ $headerTransparentBgColor: transparentize($headerBgColor, .05)
       position: fixed
       top: 0
       background: $headerTransparentBgColor
+    .contact
+      display: none
 
   +media-breakpoint-down(md)
     position: fixed
@@ -110,6 +110,25 @@ $headerTransparentBgColor: transparentize($headerBgColor, .05)
               &:hover, &.active
                 background: #0d2a59
                 border-right-color: $brand-primary
+          .contact
+            display: block
+            padding: 10px 37px
+            white-space: nowrap
+            &.phone
+              margin-top: 16px
+              a
+                font:
+                  size: 22px
+                color: $brand-light
+                border-bottom: 1px dotted $brand-light
+                text-decoration: none
+            &.email
+              margin-bottom: 20px
+              a
+                color: #a8d4f0
+                text-decoration: none
+
+
 
         &__marker
           display: none
