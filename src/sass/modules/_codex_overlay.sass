@@ -1,0 +1,54 @@
+.codex_overlay
+  @extend %full-size
+  position: fixed
+  background: transparentize($brand-dark, .05)
+  z-index: 4096
+  visibility: hidden
+  opacity: 0
+  transform: scale(.5)
+  transition: all $animationDuration ease
+  overflow: hidden
+  &.active
+    visibility: visible
+    opacity: 1
+    transform: scale(1)
+
+  &__button
+    +size(22px, 40px)
+    background: center no-repeat
+    position: absolute
+    top: 50%
+    margin-top: -20px
+    cursor: pointer
+    &--prev
+      background-image: url("/src/data-images/slider_prev.png")
+      left: 17px
+    &--next
+      background-image: url("/src/data-images/slider_next.png")
+      right: 17px
+
+  &__close
+    position: absolute
+    top: 21px
+    right: 23px
+    +size(25px)
+    background: url("/src/data-images/slider_close.png") center no-repeat
+    cursor: pointer
+
+  &__pages
+    @extend %full-size
+    .page
+      @extend %full-size
+      color: $brand-light
+      text-align: center
+      padding: 60px 50px 0
+      visibility: hidden
+      transform: translate(0, 0) rotateZ(0deg)
+      transition: all .5s ease
+      &.prev
+        transform: translate(-100%, 100px) rotateZ(-30deg)
+      &.next
+        transform: translate(100%, 100px) rotateZ(30deg)
+      &.active
+        visibility: visible
+

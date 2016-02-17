@@ -7,6 +7,7 @@ class App {
         this._initElements();
         this.scrollDuration = 3000;
         this.tileAnimationDuration = 300;
+        this.widthBreakpoint = 768;
 
         this.shown = {
             showcase: false,
@@ -47,6 +48,7 @@ class App {
         this.$sections = $(".section");
 
         this.$tiles = $(".tile_content");
+        this.$codexOverlay = $(".codex_overlay");
     }
 
     setHeaderPosition() {
@@ -188,7 +190,7 @@ class App {
 
         this.$tiles.hover(
             function(e) {
-                if(self.windowWidth > 768) {
+                if(self.windowWidth > self.widthBreakpoint) {
                     let $el = $(this),
                         $overlay = $el.find(".tile_content__overlay"),
                         overlayStyles = {left: '-100%', top: 0},
@@ -222,6 +224,46 @@ class App {
                 }
             }
         );
+
+        this.$tiles.each(function(){
+            let $codexPageContent = $(this).find(".tile_content__overlay").html(),
+                $codexPage = $("<div>").addClass("page").html($codexPageContent);
+
+            self.$codexOverlay.find(".codex_overlay__pages").append($codexPage);
+        });
+        this.$codexPage = this.$codexOverlay.find(".page");
+
+        const setActivePage = (pageIndex) => {
+            if(pageIndex !== null) {
+                this.$codexPage.filter(`:lt(${pageIndex})`).removeClass("active next").addClass("prev");
+                this.$codexPage.filter(`:gt(${pageIndex})`).removeClass("active prev").addClass("next");
+                this.$codexPage.eq(pageIndex).removeClass("prev next").addClass("active");
+            } else {
+                this.$codexPage.removeClass("active prev next");
+            }
+        };
+
+        this.$tiles.on("click", function() {
+            let pageIndex = $(this).closest(".tile").index();
+            if(self.windowWidth <= self.widthBreakpoint) {
+                self.$codexOverlay.addClass("active");
+                setActivePage(pageIndex);
+            }
+        });
+        this.$codexOverlay.find(".close").on("click", () => {
+            this.$codexOverlay.removeClass("active");
+            setActivePage(null);
+        });
+        this.$codexOverlay.find(".prev").on("click", () => {
+            let newIndex = this.$codexPage.filter(".active").index() - 1;
+            if (newIndex < 0) newIndex = this.$codexPage.size() - 1;
+            setActivePage(newIndex);
+        });
+        this.$codexOverlay.find(".next").on("click", () => {
+            let newIndex = this.$codexPage.filter(".active").index() + 1;
+            if (newIndex >= this.$codexPage.size()) newIndex = 0;
+            setActivePage(newIndex);
+        });
     }
 }
 
