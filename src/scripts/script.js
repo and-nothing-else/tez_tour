@@ -160,10 +160,10 @@ class App {
 
     setActiveMenuItem(sectionID) {
         let $menuItem = this.$mainMenuLink.filter(`[href="#${sectionID}"]`);
+        this.$mainMenuLink.removeClass("active");
         if($menuItem.length > 0) {
             let menuItemWidth = $menuItem.width(),
                 menuItemLeft = $menuItem.offset().left - this.$mainMenu.offset().left;
-            this.$mainMenuLink.removeClass("active");
             $menuItem.addClass("active");
             this.$mainMenuActiveMarker
                 .removeClass("outside")
