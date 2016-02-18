@@ -7,7 +7,9 @@
 
 .section--showcase
   min-height: 100%
-  background: #041032 url("/images/city.jpeg") center no-repeat
+  background: #041032 url("/images/city_small.jpeg") center no-repeat
+  +media-breakpoint-up(lg)
+    background: #041032 url("/images/city.jpeg") center no-repeat
   background-size: cover
 
   .section_head
