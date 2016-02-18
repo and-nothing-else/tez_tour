@@ -40,8 +40,19 @@
     .page
       @extend %full-size
       color: $brand-light
-      text-align: center
-      padding: 60px 50px 0
+      display: table
+      &__inner
+        display: table-cell
+        +size(100%)
+        text-align: center
+        vertical-align: middle
+        padding: 0 50px
+        h5
+          font:
+            size: 30px
+            weight: 300
+          color: white
+          margin-bottom: 26px
       visibility: hidden
       transform: translate(0, 0) rotateZ(0deg)
       transition: all .5s ease

@@ -227,7 +227,8 @@ class App {
 
         this.$tiles.each(function(){
             let $codexPageContent = $(this).find(".tile_content__overlay").html(),
-                $codexPage = $("<div>").addClass("page").html($codexPageContent);
+                $codexPageContentWrap = $("<div>").addClass("page__inner").html($codexPageContent),
+                $codexPage = $("<div>").addClass("page").html($codexPageContentWrap);
 
             self.$codexOverlay.find(".codex_overlay__pages").append($codexPage);
         });
