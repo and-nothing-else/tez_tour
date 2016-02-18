@@ -1,5 +1,11 @@
 .section--about
   background: url("/images/DMCCBbg.jpg") center bottom no-repeat
+  +media-breakpoint-down(md)
+    background: url("/images/about_tablet_bg.jpeg") left bottom no-repeat
+    background-size: cover
+  +media-breakpoint-down(sm)
+    background: url("/images/about_phone_bg.jpeg") center bottom no-repeat
+    background-size: 100% auto
   padding-bottom: 97px
   .section_head
     margin-bottom: 49px
