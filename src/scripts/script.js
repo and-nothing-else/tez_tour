@@ -7,7 +7,7 @@ class App {
         this._initElements();
         this.scrollDuration = 3000;
         this.tileAnimationDuration = 300;
-        this.widthBreakpoint = 768;
+        this.widthBreakpoint = 940;
 
         this.shown = {
             showcase: false,
