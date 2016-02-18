@@ -15,8 +15,10 @@
         margin-bottom: 14px
         font:
           size: 22px
-          weight: normal
       dl
+        +media-breakpoint-down(md)
+          +media-breakpoint-up(sm)
+            font-size: 18px
         dt
           +pull-left()
           margin-right: 5px
