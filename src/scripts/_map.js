@@ -1,7 +1,7 @@
 function initMap() {
     const coordinates = {
-        lat: 25.0933108,
-        lng: 55.1561033
+        lat: 25.0802341,
+        lng: 55.1532342
     },
     styleArray = [
         {
