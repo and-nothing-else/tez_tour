@@ -7,7 +7,8 @@
   opacity: 0
   transform: scale(.5)
   transition: all $animationDuration ease
-  overflow: hidden
+  overflow-y: auto
+  overflow-x: hidden
   &.active
     visibility: visible
     opacity: 1
@@ -46,7 +47,7 @@
         +size(100%)
         text-align: center
         vertical-align: middle
-        padding: 0 50px
+        padding: 50px
         h5
           font:
             size: 30px
