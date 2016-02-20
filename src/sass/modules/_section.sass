@@ -1,5 +1,7 @@
 .section
   overflow: hidden
+  &_container
+    @extend .container
   &_head
     padding-top: 93px
     text-align: center
@@ -22,15 +24,14 @@
       font:
         size: 22px
         weight: 300
+      line-height: 30px
       +media-breakpoint-up(xl)
         font-size: 28px
-      line-height: 30px
+        line-height: 42px
     +media-breakpoint-down(sm)
       width: 92%
-    +media-breakpoint-up(md)
-      width: 90%
     +media-breakpoint-up(xl)
-      width: 60%
+      width: 80%
 
   &_content
     @extend .container

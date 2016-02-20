@@ -12,12 +12,16 @@
     background: #041032 url("/images/city.jpeg") center no-repeat
   background-size: cover
 
-  .section_container
-    display: table
-    @extend %full-size
-    &__inner
-      display: table-cell
-      vertical-align: middle
+  +media-breakpoint-down(sm)
+    .section_container
+      display: table
+      +full-size()
+
+      &__inner
+        display: table-cell
+        vertical-align: middle
+    .section_head
+      padding-top: 70px
 
   .section_head
     color: white
@@ -30,8 +34,10 @@
       &__subheader
         font-size: 26px
         line-height: 36px
+    +media-breakpoint-up(md)
+      padding-top: 33.9vh
     +media-breakpoint-up(lg)
-      width: 64%
+      width: 90%
     +media-breakpoint-up(xl)
       &__header
         font-size: 50px

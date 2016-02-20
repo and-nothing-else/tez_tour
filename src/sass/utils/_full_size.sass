@@ -1,5 +1,8 @@
-%full-size
+@mixin full-size()
   +size(100%)
   position: absolute
   left: 0
   top: 0
+
+%full-size
+  +full-size()
