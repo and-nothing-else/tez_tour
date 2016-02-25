@@ -26,6 +26,7 @@ const
         npm: './node_modules',
         bower: './bower_components',
         src: './src',
+        data: './src/data',
         src_images: './src/images',
         dest: './dist'
     },
@@ -43,7 +44,8 @@ const
             vendor: `${dirs.dest}/vendor`,
             scripts: `${dirs.dest}/scripts`,
             images: `${dirs.dest}/images`,
-            styles: `${dirs.dest}/styles`
+            styles: `${dirs.dest}/styles`,
+            api: `${dirs.dest}/api`
         }
     },
     production = gutil.env.type === 'production';
@@ -68,6 +70,8 @@ gulp.task('copy', () => {
     gulp.src([
         files.vendor.jquery
     ]).pipe(gulp.dest(files.dest.vendor));
+    gulp.src(`${dirs.data}/**/*.*`)
+        .pipe(gulp.dest(files.dest.api));
     gulp.src(`${dirs.src_images}/**/*.*`)
         .pipe(gulp.dest(files.dest.images))
         .pipe(production ? gutil.noop() : connect.reload());
@@ -127,6 +131,7 @@ gulp.task('compile', () => {
 gulp.task('watch', () => {
   livereload.listen();
   gulp.watch(`${dirs.src_images}/**/*.*`, ['copy']);
+  gulp.watch(`${dirs.data}/**/*.*`, ['copy']);
   gulp.watch(`${dirs.src}/**/*.jade`, ['jade']);
   gulp.watch(`${dirs.src}/**/*.{js,jsx}`, ['compile']);
   gulp.watch(`${dirs.src}/**/*.{sass,scss}`, ['sass']);
