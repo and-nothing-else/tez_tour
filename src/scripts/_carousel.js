@@ -2,7 +2,7 @@ import owlCarousel from '../../node_modules/owlcarousel/owl-carousel/owl.carouse
 
 
 function initCarousel() {
-    $("#partners-carousel").owlCarousel({
+    $(".owl-carousel").owlCarousel({
         items : 5,
         itemsDesktop: false,
         itemsDesktopSmall : [939,3],
