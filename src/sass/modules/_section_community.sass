@@ -3,8 +3,52 @@
   background-size: cover
   color: white
   padding-top: 18px
-  padding-bottom: 90px
+  padding-bottom: 47px
   .section_head
     &__subheader
       color: $brand-secondary
     +zoom_out()
+    margin-bottom: 20px
+  .community_list
+    padding: 0 50px
+    .slide
+      text-align: center
+      padding: 0 5px
+      &_content
+        background: transparentize(#1d5ba1, .5)
+        padding: 23px 0 16px
+        &__logo
+          height: 26px
+          margin-bottom: 10px
+          img
+            vertical-align: bottom
+        h6
+          text-transform: uppercase
+          font:
+            size: 16px
+            weight: 400
+          margin-bottom: 0
+        a
+          color: #a8d4f0
+          font:
+            size: 14px
+            weight: 100
+          text-decoration: none
+    .owl-carousel
+      .owl-controls
+        position: absolute
+        top: 30px
+        left: 0
+        +size(100%, 0)
+        .owl-buttons
+          & > *
+            position: absolute
+            +size(22px, 40px)
+            background: center no-repeat
+            top: 0
+          .owl-prev
+            background-image: url("/src/data-images/slider_prev.png")
+            left: -48px
+          .owl-next
+            background-image: url("/src/data-images/slider_next.png")
+            right: -48px
